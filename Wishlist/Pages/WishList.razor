@@ -1,0 +1,20 @@
+﻿@page "/WishList"
+@using Wishlist.Components
+@using Wishlist.Models;
+
+<MudPaper Style="padding:0.5rem; margin-bottom: 0.5rem;">
+	<MudChipSet @bind-SelectedChip=_selectedChip Filter="true">
+		@foreach (string chip in Chips)
+		{
+			<MudChip Text="@chip" />
+		}
+	</MudChipSet>
+</MudPaper>
+
+<MudIconButton OnClick=@(() => Navigationmanager.NavigateTo("/Item")) Icon=@Icons.Material.Filled.Add Style="position: absolute; bottom:2rem; right:2rem;" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" />
+
+<div style="overflow:scroll; flex-grow: 1">
+	<Virtualize TItem=WishListItem Items=FilteredSource Context="item">
+		<WishListItemComponent WishListItem="item" OnDeleted=@((item) => Collection.Delete(item.Id)) />
+	</Virtualize>
+</div>

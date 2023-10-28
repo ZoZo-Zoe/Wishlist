@@ -1,0 +1,20 @@
+﻿@page "/Bought"
+@using Wishlist.Components
+
+<MudPaper Style="padding:0.5rem; margin-bottom: 0.5rem;">
+	<MudStack Row=true>
+		<MudChipSet @bind-SelectedChip=@_selectedChip Filter="true" Style="width:80%;">
+		@foreach (string chip in Chips)
+		{
+			<MudChip Text="@chip" />
+		}
+	</MudChipSet>
+	<MudTextField T="string" Label="Search" @bind-Value=@_searchQuery Margin="0"></MudTextField>
+	</MudStack>
+</MudPaper>
+
+<div style="overflow:scroll; height:75%;">
+	<Virtualize Items="FilteredSource" Context="item">
+		<BoughtItemComponent BoughtItem="item" OnDeleted="Delete" />
+	</Virtualize>
+</div>

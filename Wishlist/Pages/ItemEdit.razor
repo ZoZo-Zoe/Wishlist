@@ -1,0 +1,41 @@
+﻿@page "/Item"
+@page "/Item/{Id:guid}"
+@using Wishlist.Models;
+
+
+<MudPaper Style="padding:0.5rem; margin-bottom: 0.5rem;">
+	<h2>Preview</h2>
+	<MudPaper Style="padding:0.5rem; margin-bottom: 0.5rem;">
+		<MudStack Row=true>
+			<MudTextField Label="Name" ReadOnly=true Value=_item.Name Variant="Variant.Outlined" />
+			<MudIconButton Icon=@Icons.Material.Filled.ContentCopy />
+
+			<MudDivider Vertical=true FlexItem=true></MudDivider>
+
+			<MudTextField Label="Cost" Value=_item.Cost Variant="Variant.Outlined" />
+
+			<MudDivider Vertical=true FlexItem=true></MudDivider>
+
+			<MudTextField Label="Store" ReadOnly=true Value=_item.StoreName Variant="Variant.Outlined" />
+
+			<MudDivider Vertical=true FlexItem=true></MudDivider>
+
+			<MudTextField Label="Note" ReadOnly=true Value=_item.Notes Variant="Variant.Outlined" />
+		</MudStack>
+	</MudPaper>
+</MudPaper>
+
+
+<MudPaper Style="padding:0.5rem; margin-bottom: 0.5rem;">
+	<MudTextField Label="Name" T="string" @bind-Value="_item.Name" Variant="Variant.Outlined"  />
+	<MudTextField Label="Url" T="string" @bind-Value="_item.Link" Variant="Variant.Outlined" />
+	<MudNumericField Label="Cost" T="decimal" @bind-Value="_item.Price" Variant="Variant.Outlined" />
+	<MudTextField Label="Note" T="string" @bind-Value="_item.Notes" Variant="Variant.Outlined" />
+</MudPaper>
+
+<MudPaper Style="padding: 0.5rem;">
+	<MudStack Row=true>
+		<MudButton Color=Color.Success Variant=Variant.Filled OnClick="Save">Save</MudButton>
+		<MudButton Color=Color.Error Variant=Variant.Filled OnClick ="Cancel">Cancel</MudButton>
+	</MudStack>
+</MudPaper>

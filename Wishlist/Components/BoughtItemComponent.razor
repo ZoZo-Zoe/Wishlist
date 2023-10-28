@@ -1,0 +1,47 @@
+﻿<MudPaper Style="padding:0.5rem; margin-bottom: 0.5rem;">
+	<MudStack Row=true>
+
+		<MudTooltip Text=@BoughtItem.BoughtDate.Value.ToShortDateString() Arrow="true" RootClass="d-flex">
+			<MudIcon Icon="@Icons.Material.Filled.CalendarMonth" Title="Favorite" Style="margin-top:auto; margin-bottom:auto;" />
+		</MudTooltip>
+
+		<MudTextField Label="Name" ReadOnly=true Value=BoughtItem.Name Variant="Variant.Outlined" />
+
+		<MudDivider Vertical=true Style="height:4rem"></MudDivider>
+
+		<MudTextField Label="Cost" ReadOnly=true Value=BoughtItem.Cost Variant="Variant.Outlined" />
+
+		<MudDivider Vertical=true Style="height:4rem"></MudDivider>
+
+		<MudTextField Label="Store" ReadOnly=true Value=BoughtItem.StoreName Variant="Variant.Outlined" />
+
+		<MudDivider Vertical=true Style="height:4rem"></MudDivider>
+
+		<MudIconButton Icon=@(_shouldUnfold ? Icons.Material.Filled.KeyboardArrowUp : Icons.Material.Filled.KeyboardArrowDown) Color="Color.Error" OnClick=@(() => _shouldUnfold = !_shouldUnfold) />
+
+	</MudStack>
+
+	@if (_shouldUnfold) {
+		<MudStack Row=true Style="margin-top: 0.5rem;">
+			<MudDatePicker Label="Ordered date" ReadOnly=true Date="BoughtItem.BoughtDate" Variant="Variant.Outlined" DateFormat="dd-MMM-yyyy" />
+			<MudDivider Vertical=true Style="height:4rem"></MudDivider>
+
+			<MudTextField Label="Ordernumber" ReadOnly=true Value=BoughtItem.OrderNumber Variant="Variant.Outlined" />
+			<MudDivider Vertical=true Style="height:4rem"></MudDivider>
+
+			<MudTextField Label="Note" ReadOnly=true Value=BoughtItem.Notes Variant="Variant.Outlined" />
+		</MudStack>
+
+		<MudStack Row=true>
+			@foreach (var attachment in BoughtItem.Attachments) {
+				<MudButton StartIcon=@Icons.Material.Filled.CloudDownload OnClick="(() => DownloadAttachment(BoughtItem, attachment))">@attachment</MudButton>
+			}
+		</MudStack>
+
+		<MudStack Row=true Style="margin-top: 0.5rem;">
+			<MudButton StartIcon=@Icons.Material.Filled.Edit Color="Color.Primary" OnClick="Edit" Variant="Variant.Outlined">Edit</MudButton>
+			<MudButton StartIcon=@Icons.Material.Filled.Warning Color="Color.Error" OnClick="Delete" Variant="Variant.Outlined">Delete</MudButton>
+		</MudStack>
+	}
+
+</MudPaper>

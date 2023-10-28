@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <div style="grid-area: SideBar;">
+        <NavMenu />
+    </div>    
+   
+    <div class="grid-area: MainContent">
+        <MudPaper Style="background-color: #272727; padding:1rem; width:100%; height:100%;" Elevation="0">
+            @Body
+        </MudPaper>
+    </div>
+</div>
+
+<MudThemeProvider IsDarkMode=true />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+@code {
+
+}

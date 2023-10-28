@@ -1,0 +1,12 @@
+.page {
+    padding: 1rem;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    overflow: hidden;
+    gap:1rem;
+    grid-template-columns: 200px auto;
+    grid-template-areas:
+        "SideBar MainContent";
+    background-color: #202020;
+}

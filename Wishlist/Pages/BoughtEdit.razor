@@ -1,0 +1,60 @@
+﻿@page "/Bought/New/{Newid:guid}"
+@page "/bought/{Id:guid}"
+
+<MudPaper Style="padding:0.5rem; margin-bottom: 0.5rem;">
+	<h2>Preview</h2>
+	<MudPaper Style="padding:0.5rem; margin-bottom: 0.5rem;">
+		<MudStack Row=true>
+			<MudTooltip Text=@_item.BoughtDate.Value.ToShortDateString() Arrow="true" RootClass="d-flex">
+				<MudIcon Icon="@Icons.Material.Filled.CalendarMonth" Title="Favorite" Style="margin-top:auto; margin-bottom:auto;" />
+			</MudTooltip>
+
+			<MudTextField Label="Name" ReadOnly=true Value=_item.Name Variant="Variant.Outlined" />
+
+			<MudDivider Vertical=true Style="height:4rem"></MudDivider>
+
+			<MudTextField Label="Cost" ReadOnly=true Value=_item.Cost Variant="Variant.Outlined" />
+
+			<MudDivider Vertical=true Style="height:4rem"></MudDivider>
+
+			<MudTextField Label="Store" ReadOnly=true Value=_item.StoreName Variant="Variant.Outlined" />
+
+			<MudDivider Vertical=true Style="height:4rem"></MudDivider>
+
+		</MudStack>
+	</MudPaper>
+</MudPaper>
+
+
+<MudPaper Style="padding:0.5rem; margin-bottom: 0.5rem;">
+	<MudDatePicker Label="Ordered Date" @bind-Date="_item.BoughtDate" Variant="Variant.Outlined"  />
+	<MudTextField Label="Order number" T="string" @bind-Value="_item.OrderNumber" Variant="Variant.Outlined" />
+	<MudTextField Label="Name" T="string" @bind-Value="_item.Name" Variant="Variant.Outlined" />
+	<MudTextField Label="Url" T="string" @bind-Value="_item.Link" Variant="Variant.Outlined" />
+	<MudNumericField Label="Cost" T="decimal" @bind-Value="_item.Price" Variant="Variant.Outlined" />
+	<MudTextField Label="Note" T="string" @bind-Value="_item.Notes" Variant="Variant.Outlined" />
+</MudPaper>
+
+<MudPaper Style="padding:0.5rem; margin-bottom: 0.5rem;">
+	<MudList>
+		@foreach (var attachment in _item.Attachments) {
+			<MudListItem Icon="@Icons.Material.Filled.AttachFile">
+				@attachment <MudIconButton Icon=@Icons.Material.Filled.Warning OnClick="(() => DeleteAttachment(attachment))" />
+			</MudListItem>
+		}
+	</MudList>
+
+	<MudButton Variant="Variant.Filled"
+			   Color="Color.Primary"
+			   StartIcon="@Icons.Material.Filled.CloudUpload"
+			   OnClick="UploadAttachment">
+		   Upload
+	</MudButton>
+</MudPaper>
+
+<MudPaper Style="padding: 0.5rem;">
+	<MudStack Row=true>
+		<MudButton Color=Color.Success Variant=Variant.Filled OnClick="Save">Save</MudButton>
+		<MudButton Color=Color.Error Variant=Variant.Filled OnClick="Cancel">Cancel</MudButton>
+	</MudStack>
+</MudPaper>
