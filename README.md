@@ -1,0 +1,2 @@
+# Wishlist
+Windows only ATM
